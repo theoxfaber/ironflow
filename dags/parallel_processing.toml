@@ -1,0 +1,38 @@
+[dag]
+id = "parallel_processing"
+description = "DAG with parallel task execution"
+
+[[dag.tasks]]
+id = "start"
+operator = "bash"
+command = "echo 'Pipeline starting...'"
+
+[[dag.tasks]]
+id = "process_region_us"
+operator = "bash"
+command = "echo 'Processing US region...' && sleep 2 && echo 'US region done'"
+depends_on = ["start"]
+
+[[dag.tasks]]
+id = "process_region_eu"
+operator = "bash"
+command = "echo 'Processing EU region...' && sleep 2 && echo 'EU region done'"
+depends_on = ["start"]
+
+[[dag.tasks]]
+id = "process_region_asia"
+operator = "bash"
+command = "echo 'Processing Asia region...' && sleep 2 && echo 'Asia region done'"
+depends_on = ["start"]
+
+[[dag.tasks]]
+id = "aggregate_results"
+operator = "bash"
+command = "echo 'Aggregating results from all regions...'"
+depends_on = ["process_region_us", "process_region_eu", "process_region_asia"]
+
+[[dag.tasks]]
+id = "send_summary"
+operator = "bash"
+command = "echo 'Summary: All regions processed successfully'"
+depends_on = ["aggregate_results"]

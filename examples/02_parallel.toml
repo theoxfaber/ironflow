@@ -1,0 +1,38 @@
+[dag]
+id = "parallel_fan_out"
+description = "Demonstrates parallel task execution (fan-out/fan-in)"
+schedule = "*/15 * * * *"  # every 15 minutes
+
+[[dag.tasks]]
+id = "start"
+operator = "bash"
+[dag.tasks.config]
+command = "echo 'Starting parallel jobs...'"
+
+[[dag.tasks]]
+id = "worker_1"
+operator = "bash"
+depends_on = ["start"]
+[dag.tasks.config]
+command = "sleep 2 && echo 'Worker 1 done'"
+
+[[dag.tasks]]
+id = "worker_2"
+operator = "bash"
+depends_on = ["start"]
+[dag.tasks.config]
+command = "sleep 2 && echo 'Worker 2 done'"
+
+[[dag.tasks]]
+id = "worker_3"
+operator = "bash"
+depends_on = ["start"]
+[dag.tasks.config]
+command = "sleep 2 && echo 'Worker 3 done'"
+
+[[dag.tasks]]
+id = "aggregate"
+operator = "bash"
+depends_on = ["worker_1", "worker_2", "worker_3"]
+[dag.tasks.config]
+command = "echo 'All workers finished, aggregating results...'"

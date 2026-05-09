@@ -1,0 +1,24 @@
+[dag]
+id = "sequential_demo"
+description = "A simple linear pipeline demonstrating task dependencies"
+schedule = "0 * * * *"  # every hour
+
+[[dag.tasks]]
+id = "prepare"
+operator = "bash"
+[dag.tasks.config]
+command = "echo '{\"status\": \"ready\", \"timestamp\": \"$(date)\"}'"
+
+[[dag.tasks]]
+id = "process"
+operator = "bash"
+depends_on = ["prepare"]
+[dag.tasks.config]
+command = "echo 'Processing data from upstream...'"
+
+[[dag.tasks]]
+id = "notify"
+operator = "bash"
+depends_on = ["process"]
+[dag.tasks.config]
+command = "echo 'Pipeline complete!'"

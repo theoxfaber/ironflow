@@ -1,0 +1,19 @@
+[dag]
+id = "http_data_fetcher"
+description = "Fetches data from an API and passes it to a downstream task"
+schedule = "0 0 * * *"  # midnight daily
+
+[[dag.tasks]]
+id = "fetch_weather"
+operator = "http"
+[dag.tasks.config]
+url = "https://api.open-meteo.com/v1/forecast?latitude=52.52&longitude=13.41&current_weather=true"
+method = "GET"
+
+[[dag.tasks]]
+id = "log_result"
+operator = "bash"
+depends_on = ["fetch_weather"]
+xcom_inputs = ["fetch_weather"]
+[dag.tasks.config]
+command = "echo 'Weather Data: {{xcom.fetch_weather}}'"

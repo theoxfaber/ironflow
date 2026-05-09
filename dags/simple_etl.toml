@@ -1,0 +1,26 @@
+[dag]
+id = "simple_etl"
+description = "Simple ETL pipeline"
+
+[[dag.tasks]]
+id = "extract"
+operator = "bash"
+command = "echo 'Extracting data from source...' && sleep 1 && echo 'Extracted 1000 rows'"
+
+[[dag.tasks]]
+id = "transform"
+operator = "bash"
+command = "echo 'Transforming data...' && sleep 1 && echo 'Cleaned and deduplicated'"
+depends_on = ["extract"]
+
+[[dag.tasks]]
+id = "load"
+operator = "bash"
+command = "echo 'Loading data to warehouse...' && sleep 1 && echo 'Loaded successfully'"
+depends_on = ["transform"]
+
+[[dag.tasks]]
+id = "notify"
+operator = "bash"
+command = "echo 'ETL pipeline completed successfully!'"
+depends_on = ["load"]

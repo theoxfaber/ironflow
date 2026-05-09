@@ -1,0 +1,1004 @@
+{
+  "id": "benchmark_dag_100",
+  "description": "A 100-task sequential DAG for benchmarking overhead",
+  "tasks": [
+    {
+      "id": "task_0",
+      "operator": "bash",
+      "depends_on": [],
+      "config": {
+        "command": "echo 'Executing task 0'"
+      }
+    },
+    {
+      "id": "task_1",
+      "operator": "bash",
+      "depends_on": [
+        "task_0"
+      ],
+      "config": {
+        "command": "echo 'Executing task 1'"
+      }
+    },
+    {
+      "id": "task_2",
+      "operator": "bash",
+      "depends_on": [
+        "task_1"
+      ],
+      "config": {
+        "command": "echo 'Executing task 2'"
+      }
+    },
+    {
+      "id": "task_3",
+      "operator": "bash",
+      "depends_on": [
+        "task_2"
+      ],
+      "config": {
+        "command": "echo 'Executing task 3'"
+      }
+    },
+    {
+      "id": "task_4",
+      "operator": "bash",
+      "depends_on": [
+        "task_3"
+      ],
+      "config": {
+        "command": "echo 'Executing task 4'"
+      }
+    },
+    {
+      "id": "task_5",
+      "operator": "bash",
+      "depends_on": [
+        "task_4"
+      ],
+      "config": {
+        "command": "echo 'Executing task 5'"
+      }
+    },
+    {
+      "id": "task_6",
+      "operator": "bash",
+      "depends_on": [
+        "task_5"
+      ],
+      "config": {
+        "command": "echo 'Executing task 6'"
+      }
+    },
+    {
+      "id": "task_7",
+      "operator": "bash",
+      "depends_on": [
+        "task_6"
+      ],
+      "config": {
+        "command": "echo 'Executing task 7'"
+      }
+    },
+    {
+      "id": "task_8",
+      "operator": "bash",
+      "depends_on": [
+        "task_7"
+      ],
+      "config": {
+        "command": "echo 'Executing task 8'"
+      }
+    },
+    {
+      "id": "task_9",
+      "operator": "bash",
+      "depends_on": [
+        "task_8"
+      ],
+      "config": {
+        "command": "echo 'Executing task 9'"
+      }
+    },
+    {
+      "id": "task_10",
+      "operator": "bash",
+      "depends_on": [
+        "task_9"
+      ],
+      "config": {
+        "command": "echo 'Executing task 10'"
+      }
+    },
+    {
+      "id": "task_11",
+      "operator": "bash",
+      "depends_on": [
+        "task_10"
+      ],
+      "config": {
+        "command": "echo 'Executing task 11'"
+      }
+    },
+    {
+      "id": "task_12",
+      "operator": "bash",
+      "depends_on": [
+        "task_11"
+      ],
+      "config": {
+        "command": "echo 'Executing task 12'"
+      }
+    },
+    {
+      "id": "task_13",
+      "operator": "bash",
+      "depends_on": [
+        "task_12"
+      ],
+      "config": {
+        "command": "echo 'Executing task 13'"
+      }
+    },
+    {
+      "id": "task_14",
+      "operator": "bash",
+      "depends_on": [
+        "task_13"
+      ],
+      "config": {
+        "command": "echo 'Executing task 14'"
+      }
+    },
+    {
+      "id": "task_15",
+      "operator": "bash",
+      "depends_on": [
+        "task_14"
+      ],
+      "config": {
+        "command": "echo 'Executing task 15'"
+      }
+    },
+    {
+      "id": "task_16",
+      "operator": "bash",
+      "depends_on": [
+        "task_15"
+      ],
+      "config": {
+        "command": "echo 'Executing task 16'"
+      }
+    },
+    {
+      "id": "task_17",
+      "operator": "bash",
+      "depends_on": [
+        "task_16"
+      ],
+      "config": {
+        "command": "echo 'Executing task 17'"
+      }
+    },
+    {
+      "id": "task_18",
+      "operator": "bash",
+      "depends_on": [
+        "task_17"
+      ],
+      "config": {
+        "command": "echo 'Executing task 18'"
+      }
+    },
+    {
+      "id": "task_19",
+      "operator": "bash",
+      "depends_on": [
+        "task_18"
+      ],
+      "config": {
+        "command": "echo 'Executing task 19'"
+      }
+    },
+    {
+      "id": "task_20",
+      "operator": "bash",
+      "depends_on": [
+        "task_19"
+      ],
+      "config": {
+        "command": "echo 'Executing task 20'"
+      }
+    },
+    {
+      "id": "task_21",
+      "operator": "bash",
+      "depends_on": [
+        "task_20"
+      ],
+      "config": {
+        "command": "echo 'Executing task 21'"
+      }
+    },
+    {
+      "id": "task_22",
+      "operator": "bash",
+      "depends_on": [
+        "task_21"
+      ],
+      "config": {
+        "command": "echo 'Executing task 22'"
+      }
+    },
+    {
+      "id": "task_23",
+      "operator": "bash",
+      "depends_on": [
+        "task_22"
+      ],
+      "config": {
+        "command": "echo 'Executing task 23'"
+      }
+    },
+    {
+      "id": "task_24",
+      "operator": "bash",
+      "depends_on": [
+        "task_23"
+      ],
+      "config": {
+        "command": "echo 'Executing task 24'"
+      }
+    },
+    {
+      "id": "task_25",
+      "operator": "bash",
+      "depends_on": [
+        "task_24"
+      ],
+      "config": {
+        "command": "echo 'Executing task 25'"
+      }
+    },
+    {
+      "id": "task_26",
+      "operator": "bash",
+      "depends_on": [
+        "task_25"
+      ],
+      "config": {
+        "command": "echo 'Executing task 26'"
+      }
+    },
+    {
+      "id": "task_27",
+      "operator": "bash",
+      "depends_on": [
+        "task_26"
+      ],
+      "config": {
+        "command": "echo 'Executing task 27'"
+      }
+    },
+    {
+      "id": "task_28",
+      "operator": "bash",
+      "depends_on": [
+        "task_27"
+      ],
+      "config": {
+        "command": "echo 'Executing task 28'"
+      }
+    },
+    {
+      "id": "task_29",
+      "operator": "bash",
+      "depends_on": [
+        "task_28"
+      ],
+      "config": {
+        "command": "echo 'Executing task 29'"
+      }
+    },
+    {
+      "id": "task_30",
+      "operator": "bash",
+      "depends_on": [
+        "task_29"
+      ],
+      "config": {
+        "command": "echo 'Executing task 30'"
+      }
+    },
+    {
+      "id": "task_31",
+      "operator": "bash",
+      "depends_on": [
+        "task_30"
+      ],
+      "config": {
+        "command": "echo 'Executing task 31'"
+      }
+    },
+    {
+      "id": "task_32",
+      "operator": "bash",
+      "depends_on": [
+        "task_31"
+      ],
+      "config": {
+        "command": "echo 'Executing task 32'"
+      }
+    },
+    {
+      "id": "task_33",
+      "operator": "bash",
+      "depends_on": [
+        "task_32"
+      ],
+      "config": {
+        "command": "echo 'Executing task 33'"
+      }
+    },
+    {
+      "id": "task_34",
+      "operator": "bash",
+      "depends_on": [
+        "task_33"
+      ],
+      "config": {
+        "command": "echo 'Executing task 34'"
+      }
+    },
+    {
+      "id": "task_35",
+      "operator": "bash",
+      "depends_on": [
+        "task_34"
+      ],
+      "config": {
+        "command": "echo 'Executing task 35'"
+      }
+    },
+    {
+      "id": "task_36",
+      "operator": "bash",
+      "depends_on": [
+        "task_35"
+      ],
+      "config": {
+        "command": "echo 'Executing task 36'"
+      }
+    },
+    {
+      "id": "task_37",
+      "operator": "bash",
+      "depends_on": [
+        "task_36"
+      ],
+      "config": {
+        "command": "echo 'Executing task 37'"
+      }
+    },
+    {
+      "id": "task_38",
+      "operator": "bash",
+      "depends_on": [
+        "task_37"
+      ],
+      "config": {
+        "command": "echo 'Executing task 38'"
+      }
+    },
+    {
+      "id": "task_39",
+      "operator": "bash",
+      "depends_on": [
+        "task_38"
+      ],
+      "config": {
+        "command": "echo 'Executing task 39'"
+      }
+    },
+    {
+      "id": "task_40",
+      "operator": "bash",
+      "depends_on": [
+        "task_39"
+      ],
+      "config": {
+        "command": "echo 'Executing task 40'"
+      }
+    },
+    {
+      "id": "task_41",
+      "operator": "bash",
+      "depends_on": [
+        "task_40"
+      ],
+      "config": {
+        "command": "echo 'Executing task 41'"
+      }
+    },
+    {
+      "id": "task_42",
+      "operator": "bash",
+      "depends_on": [
+        "task_41"
+      ],
+      "config": {
+        "command": "echo 'Executing task 42'"
+      }
+    },
+    {
+      "id": "task_43",
+      "operator": "bash",
+      "depends_on": [
+        "task_42"
+      ],
+      "config": {
+        "command": "echo 'Executing task 43'"
+      }
+    },
+    {
+      "id": "task_44",
+      "operator": "bash",
+      "depends_on": [
+        "task_43"
+      ],
+      "config": {
+        "command": "echo 'Executing task 44'"
+      }
+    },
+    {
+      "id": "task_45",
+      "operator": "bash",
+      "depends_on": [
+        "task_44"
+      ],
+      "config": {
+        "command": "echo 'Executing task 45'"
+      }
+    },
+    {
+      "id": "task_46",
+      "operator": "bash",
+      "depends_on": [
+        "task_45"
+      ],
+      "config": {
+        "command": "echo 'Executing task 46'"
+      }
+    },
+    {
+      "id": "task_47",
+      "operator": "bash",
+      "depends_on": [
+        "task_46"
+      ],
+      "config": {
+        "command": "echo 'Executing task 47'"
+      }
+    },
+    {
+      "id": "task_48",
+      "operator": "bash",
+      "depends_on": [
+        "task_47"
+      ],
+      "config": {
+        "command": "echo 'Executing task 48'"
+      }
+    },
+    {
+      "id": "task_49",
+      "operator": "bash",
+      "depends_on": [
+        "task_48"
+      ],
+      "config": {
+        "command": "echo 'Executing task 49'"
+      }
+    },
+    {
+      "id": "task_50",
+      "operator": "bash",
+      "depends_on": [
+        "task_49"
+      ],
+      "config": {
+        "command": "echo 'Executing task 50'"
+      }
+    },
+    {
+      "id": "task_51",
+      "operator": "bash",
+      "depends_on": [
+        "task_50"
+      ],
+      "config": {
+        "command": "echo 'Executing task 51'"
+      }
+    },
+    {
+      "id": "task_52",
+      "operator": "bash",
+      "depends_on": [
+        "task_51"
+      ],
+      "config": {
+        "command": "echo 'Executing task 52'"
+      }
+    },
+    {
+      "id": "task_53",
+      "operator": "bash",
+      "depends_on": [
+        "task_52"
+      ],
+      "config": {
+        "command": "echo 'Executing task 53'"
+      }
+    },
+    {
+      "id": "task_54",
+      "operator": "bash",
+      "depends_on": [
+        "task_53"
+      ],
+      "config": {
+        "command": "echo 'Executing task 54'"
+      }
+    },
+    {
+      "id": "task_55",
+      "operator": "bash",
+      "depends_on": [
+        "task_54"
+      ],
+      "config": {
+        "command": "echo 'Executing task 55'"
+      }
+    },
+    {
+      "id": "task_56",
+      "operator": "bash",
+      "depends_on": [
+        "task_55"
+      ],
+      "config": {
+        "command": "echo 'Executing task 56'"
+      }
+    },
+    {
+      "id": "task_57",
+      "operator": "bash",
+      "depends_on": [
+        "task_56"
+      ],
+      "config": {
+        "command": "echo 'Executing task 57'"
+      }
+    },
+    {
+      "id": "task_58",
+      "operator": "bash",
+      "depends_on": [
+        "task_57"
+      ],
+      "config": {
+        "command": "echo 'Executing task 58'"
+      }
+    },
+    {
+      "id": "task_59",
+      "operator": "bash",
+      "depends_on": [
+        "task_58"
+      ],
+      "config": {
+        "command": "echo 'Executing task 59'"
+      }
+    },
+    {
+      "id": "task_60",
+      "operator": "bash",
+      "depends_on": [
+        "task_59"
+      ],
+      "config": {
+        "command": "echo 'Executing task 60'"
+      }
+    },
+    {
+      "id": "task_61",
+      "operator": "bash",
+      "depends_on": [
+        "task_60"
+      ],
+      "config": {
+        "command": "echo 'Executing task 61'"
+      }
+    },
+    {
+      "id": "task_62",
+      "operator": "bash",
+      "depends_on": [
+        "task_61"
+      ],
+      "config": {
+        "command": "echo 'Executing task 62'"
+      }
+    },
+    {
+      "id": "task_63",
+      "operator": "bash",
+      "depends_on": [
+        "task_62"
+      ],
+      "config": {
+        "command": "echo 'Executing task 63'"
+      }
+    },
+    {
+      "id": "task_64",
+      "operator": "bash",
+      "depends_on": [
+        "task_63"
+      ],
+      "config": {
+        "command": "echo 'Executing task 64'"
+      }
+    },
+    {
+      "id": "task_65",
+      "operator": "bash",
+      "depends_on": [
+        "task_64"
+      ],
+      "config": {
+        "command": "echo 'Executing task 65'"
+      }
+    },
+    {
+      "id": "task_66",
+      "operator": "bash",
+      "depends_on": [
+        "task_65"
+      ],
+      "config": {
+        "command": "echo 'Executing task 66'"
+      }
+    },
+    {
+      "id": "task_67",
+      "operator": "bash",
+      "depends_on": [
+        "task_66"
+      ],
+      "config": {
+        "command": "echo 'Executing task 67'"
+      }
+    },
+    {
+      "id": "task_68",
+      "operator": "bash",
+      "depends_on": [
+        "task_67"
+      ],
+      "config": {
+        "command": "echo 'Executing task 68'"
+      }
+    },
+    {
+      "id": "task_69",
+      "operator": "bash",
+      "depends_on": [
+        "task_68"
+      ],
+      "config": {
+        "command": "echo 'Executing task 69'"
+      }
+    },
+    {
+      "id": "task_70",
+      "operator": "bash",
+      "depends_on": [
+        "task_69"
+      ],
+      "config": {
+        "command": "echo 'Executing task 70'"
+      }
+    },
+    {
+      "id": "task_71",
+      "operator": "bash",
+      "depends_on": [
+        "task_70"
+      ],
+      "config": {
+        "command": "echo 'Executing task 71'"
+      }
+    },
+    {
+      "id": "task_72",
+      "operator": "bash",
+      "depends_on": [
+        "task_71"
+      ],
+      "config": {
+        "command": "echo 'Executing task 72'"
+      }
+    },
+    {
+      "id": "task_73",
+      "operator": "bash",
+      "depends_on": [
+        "task_72"
+      ],
+      "config": {
+        "command": "echo 'Executing task 73'"
+      }
+    },
+    {
+      "id": "task_74",
+      "operator": "bash",
+      "depends_on": [
+        "task_73"
+      ],
+      "config": {
+        "command": "echo 'Executing task 74'"
+      }
+    },
+    {
+      "id": "task_75",
+      "operator": "bash",
+      "depends_on": [
+        "task_74"
+      ],
+      "config": {
+        "command": "echo 'Executing task 75'"
+      }
+    },
+    {
+      "id": "task_76",
+      "operator": "bash",
+      "depends_on": [
+        "task_75"
+      ],
+      "config": {
+        "command": "echo 'Executing task 76'"
+      }
+    },
+    {
+      "id": "task_77",
+      "operator": "bash",
+      "depends_on": [
+        "task_76"
+      ],
+      "config": {
+        "command": "echo 'Executing task 77'"
+      }
+    },
+    {
+      "id": "task_78",
+      "operator": "bash",
+      "depends_on": [
+        "task_77"
+      ],
+      "config": {
+        "command": "echo 'Executing task 78'"
+      }
+    },
+    {
+      "id": "task_79",
+      "operator": "bash",
+      "depends_on": [
+        "task_78"
+      ],
+      "config": {
+        "command": "echo 'Executing task 79'"
+      }
+    },
+    {
+      "id": "task_80",
+      "operator": "bash",
+      "depends_on": [
+        "task_79"
+      ],
+      "config": {
+        "command": "echo 'Executing task 80'"
+      }
+    },
+    {
+      "id": "task_81",
+      "operator": "bash",
+      "depends_on": [
+        "task_80"
+      ],
+      "config": {
+        "command": "echo 'Executing task 81'"
+      }
+    },
+    {
+      "id": "task_82",
+      "operator": "bash",
+      "depends_on": [
+        "task_81"
+      ],
+      "config": {
+        "command": "echo 'Executing task 82'"
+      }
+    },
+    {
+      "id": "task_83",
+      "operator": "bash",
+      "depends_on": [
+        "task_82"
+      ],
+      "config": {
+        "command": "echo 'Executing task 83'"
+      }
+    },
+    {
+      "id": "task_84",
+      "operator": "bash",
+      "depends_on": [
+        "task_83"
+      ],
+      "config": {
+        "command": "echo 'Executing task 84'"
+      }
+    },
+    {
+      "id": "task_85",
+      "operator": "bash",
+      "depends_on": [
+        "task_84"
+      ],
+      "config": {
+        "command": "echo 'Executing task 85'"
+      }
+    },
+    {
+      "id": "task_86",
+      "operator": "bash",
+      "depends_on": [
+        "task_85"
+      ],
+      "config": {
+        "command": "echo 'Executing task 86'"
+      }
+    },
+    {
+      "id": "task_87",
+      "operator": "bash",
+      "depends_on": [
+        "task_86"
+      ],
+      "config": {
+        "command": "echo 'Executing task 87'"
+      }
+    },
+    {
+      "id": "task_88",
+      "operator": "bash",
+      "depends_on": [
+        "task_87"
+      ],
+      "config": {
+        "command": "echo 'Executing task 88'"
+      }
+    },
+    {
+      "id": "task_89",
+      "operator": "bash",
+      "depends_on": [
+        "task_88"
+      ],
+      "config": {
+        "command": "echo 'Executing task 89'"
+      }
+    },
+    {
+      "id": "task_90",
+      "operator": "bash",
+      "depends_on": [
+        "task_89"
+      ],
+      "config": {
+        "command": "echo 'Executing task 90'"
+      }
+    },
+    {
+      "id": "task_91",
+      "operator": "bash",
+      "depends_on": [
+        "task_90"
+      ],
+      "config": {
+        "command": "echo 'Executing task 91'"
+      }
+    },
+    {
+      "id": "task_92",
+      "operator": "bash",
+      "depends_on": [
+        "task_91"
+      ],
+      "config": {
+        "command": "echo 'Executing task 92'"
+      }
+    },
+    {
+      "id": "task_93",
+      "operator": "bash",
+      "depends_on": [
+        "task_92"
+      ],
+      "config": {
+        "command": "echo 'Executing task 93'"
+      }
+    },
+    {
+      "id": "task_94",
+      "operator": "bash",
+      "depends_on": [
+        "task_93"
+      ],
+      "config": {
+        "command": "echo 'Executing task 94'"
+      }
+    },
+    {
+      "id": "task_95",
+      "operator": "bash",
+      "depends_on": [
+        "task_94"
+      ],
+      "config": {
+        "command": "echo 'Executing task 95'"
+      }
+    },
+    {
+      "id": "task_96",
+      "operator": "bash",
+      "depends_on": [
+        "task_95"
+      ],
+      "config": {
+        "command": "echo 'Executing task 96'"
+      }
+    },
+    {
+      "id": "task_97",
+      "operator": "bash",
+      "depends_on": [
+        "task_96"
+      ],
+      "config": {
+        "command": "echo 'Executing task 97'"
+      }
+    },
+    {
+      "id": "task_98",
+      "operator": "bash",
+      "depends_on": [
+        "task_97"
+      ],
+      "config": {
+        "command": "echo 'Executing task 98'"
+      }
+    },
+    {
+      "id": "task_99",
+      "operator": "bash",
+      "depends_on": [
+        "task_98"
+      ],
+      "config": {
+        "command": "echo 'Executing task 99'"
+      }
+    }
+  ]
+}

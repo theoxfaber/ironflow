@@ -1,0 +1,28 @@
+[dag]
+id = "data_validation"
+description = "Data validation pipeline with retries"
+
+[[dag.tasks]]
+id = "fetch_data"
+operator = "bash"
+command = "echo 'Fetching data from API...' && echo '{\"status\": \"success\", \"records\": 100}'"
+retries = 2
+retry_delay_secs = 5
+
+[[dag.tasks]]
+id = "validate_schema"
+operator = "bash"
+command = "echo 'Validating data schema...' && echo 'Schema validation passed'"
+depends_on = ["fetch_data"]
+
+[[dag.tasks]]
+id = "validate_quality"
+operator = "bash"
+command = "echo 'Running quality checks...' && echo 'All quality checks passed'"
+depends_on = ["validate_schema"]
+
+[[dag.tasks]]
+id = "report"
+operator = "bash"
+command = "echo 'Generating validation report...'"
+depends_on = ["validate_quality"]

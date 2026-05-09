@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IronFlow - Workflow Orchestrator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            background: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.1);
+        }
+
+        .card h2 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            color: #f1f5f9;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-full {
+            grid-column: 1 / -1;
+        }
+
+        .stat-box {
+            display: inline-block;
+            background: #0f172a;
+            padding: 16px 24px;
+            border-radius: 8px;
+            margin-right: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        .dag-list {
+            list-style: none;
+        }
+
+        .dag-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #0f172a;
+            border-radius: 6px;
+            border-left: 4px solid #667eea;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .dag-item:hover {
+            background: #1a1f35;
+            border-left-color: #764ba2;
+        }
+
+        .dag-name {
+            font-weight: 500;
+            color: #f1f5f9;
+        }
+
+        .dag-status {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .status-queued {
+            background: rgba(100, 116, 139, 0.2);
+            color: #cbd5e1;
+        }
+
+        .status-running {
+            background: rgba(59, 130, 246, 0.2);
+            color: #3b82f6;
+            animation: pulse 2s infinite;
+        }
+
+        .status-success {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .status-failed {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .run-item {
+            padding: 12px;
+            margin-bottom: 8px;
+            background: #0f172a;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .run-time {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .task-graph {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 12px;
+        }
+
+        .task-node {
+            padding: 16px;
+            background: #0f172a;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .task-node:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+
+        .task-node.running {
+            border-color: #3b82f6;
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .task-node.success {
+            border-color: #22c55e;
+            background: rgba(34, 197, 94, 0.1);
+        }
+
+        .task-node.failed {
+            border-color: #ef4444;
+            background: rgba(239, 68, 68, 0.1);
+        }
+
+        .task-node.pending {
+            border-color: #94a3b8;
+            background: #0f172a;
+        }
+
+        .log-viewer {
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 6px;
+            padding: 12px;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            color: #cbd5e1;
+            line-height: 1.5;
+        }
+
+        .log-line {
+            margin-bottom: 4px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 8px 16px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-right: 8px;
+        }
+
+        .button:hover {
+            background: #764ba2;
+            transform: translateY(-1px);
+        }
+
+        .button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .refresh-btn {
+            float: right;
+            margin-top: -4px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            border-bottom: 1px solid #334155;
+        }
+
+        .tab {
+            padding: 12px 16px;
+            background: transparent;
+            border: none;
+            color: #94a3b8;
+            cursor: pointer;
+            font-weight: 500;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #94a3b8;
+        }
+
+        .spinner {
+            border: 2px solid #334155;
+            border-top: 2px solid #667eea;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid #ef4444;
+            color: #fca5a5;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .success-msg {
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid #22c55e;
+            color: #86efac;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 24px;
+            }
+
+            .task-graph {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>⚡ IronFlow Dashboard</h1>
+            <p>High-performance workflow orchestrator | Real-time monitoring</p>
+        </header>
+
+        <div id="app">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Loading Dashboard...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // IronFlow Dashboard Application
+        class IronFlowDashboard {
+            constructor() {
+                this.apiUrl = '/api';
+                this.refreshInterval = 5000; // 5 seconds
+                this.dags = [];
+                this.selectedDag = null;
+                this.init();
+            }
+
+            async init() {
+                await this.loadDags();
+                this.render();
+                setInterval(() => this.refresh(), this.refreshInterval);
+            }
+
+            async loadDags() {
+                try {
+                    const response = await fetch(`${this.apiUrl}/dags`);
+                    const result = await response.json();
+                    this.dags = result.data || [];
+                } catch (error) {
+                    console.error('Error loading DAGs:', error);
+                    this.dags = [];
+                }
+            }
+
+            async loadDagRuns(dagId) {
+                try {
+                    const response = await fetch(`${this.apiUrl}/dags/${dagId}/runs`);
+                    const result = await response.json();
+                    return result.data || [];
+                } catch (error) {
+                    console.error('Error loading DAG runs:', error);
+                    return [];
+                }
+            }
+
+            async triggerDag(dagId) {
+                try {
+                    const response = await fetch(`${this.apiUrl}/dags/${dagId}/trigger`, {
+                        method: 'POST'
+                    });
+                    if (response.ok) {
+                        alert('DAG triggered successfully!');
+                        await this.refresh();
+                    }
+                } catch (error) {
+                    alert('Error triggering DAG: ' + error.message);
+                }
+            }
+
+            async refresh() {
+                await this.loadDags();
+                this.render();
+            }
+
+            getStatusColor(status) {
+                switch(status) {
+                    case 'running': return '#3b82f6';
+                    case 'success': return '#22c55e';
+                    case 'failed': return '#ef4444';
+                    case 'queued': return '#64748b';
+                    default: return '#94a3b8';
+                }
+            }
+
+            renderDagList() {
+                const totalDags = this.dags.length;
+                const stats = `
+                    <div class="stat-box">
+                        <div class="stat-number">${totalDags}</div>
+                        <div class="stat-label">Total DAGs</div>
+                    </div>
+                `;
+
+                const dagItems = this.dags.map((dag, idx) => {
+                    const latestRun = dag.latest_run || {};
+                    const statusClass = `status-${(latestRun.status || 'queued').toLowerCase()}`;
+                    return `
+                        <li class="dag-item" onclick="dashboard.selectDag('${dag.id}')">
+                            <div>
+                                <div class="dag-name">${dag.id}</div>
+                                <small style="color: #94a3b8;">${dag.description || 'No description'}</small>
+                            </div>
+                            <span class="dag-status ${statusClass}">${(latestRun.status || 'No runs').toUpperCase()}</span>
+                        </li>
+                    `;
+                }).join('');
+
+                return `
+                    ${stats}
+                    <ul class="dag-list">
+                        ${dagItems || '<li class="dag-item">No DAGs found</li>'}
+                    </ul>
+                `;
+            }
+
+            renderRunHistory() {
+                if (!this.selectedDag) {
+                    return '<p style="color: #94a3b8;">Select a DAG to view run history</p>';
+                }
+
+                const runs = this.selectedDag.runs || [];
+                const runItems = runs.slice(0, 10).map(run => {
+                    const statusClass = `status-${run.status.toLowerCase()}`;
+                    const startTime = new Date(run.started_at).toLocaleString();
+                    return `
+                        <div class="run-item">
+                            <div>
+                                <div style="font-weight: 500;">${run.id.substring(0, 12)}...</div>
+                                <div class="run-time">${startTime}</div>
+                            </div>
+                            <span class="dag-status ${statusClass}">${run.status.toUpperCase()}</span>
+                        </div>
+                    `;
+                }).join('');
+
+                return runItems || '<p style="color: #94a3b8;">No runs yet</p>';
+            }
+
+            renderTaskGraph() {
+                if (!this.selectedDag || !this.selectedDag.tasks) {
+                    return '<p style="color: #94a3b8;">Select a DAG to view tasks</p>';
+                }
+
+                const taskNodes = this.selectedDag.tasks.map(task => {
+                    const status = task.status || 'pending';
+                    const statusClass = `task-node ${status}`;
+                    return `<div class="${statusClass}">${task.id}</div>`;
+                }).join('');
+
+                return `<div class="task-graph">${taskNodes}</div>`;
+            }
+
+            renderLogs() {
+                if (!this.selectedDag || !this.selectedDag.logs) {
+                    return '<div class="log-viewer"><div class="log-line">No logs available</div></div>';
+                }
+
+                const logLines = this.selectedDag.logs.split('\n').map(line => {
+                    return `<div class="log-line">${this.escapeHtml(line)}</div>`;
+                }).join('');
+
+                return `<div class="log-viewer">${logLines}</div>`;
+            }
+
+            escapeHtml(text) {
+                const map = {
+                    '&': '&amp;',
+                    '<': '&lt;',
+                    '>': '&gt;',
+                    '"': '&quot;',
+                    "'": '&#039;'
+                };
+                return text.replace(/[&<>"']/g, m => map[m]);
+            }
+
+            selectDag(dagId) {
+                const dag = this.dags.find(d => d.id === dagId);
+                if (dag) {
+                    this.selectedDag = dag;
+                    this.render();
+                }
+            }
+
+            render() {
+                const html = `
+                    <div class="main-grid">
+                        <div class="card">
+                            <h2>📊 DAGs</h2>
+                            ${this.renderDagList()}
+                        </div>
+
+                        <div class="card">
+                            <h2>📈 Run History
+                                <button class="button refresh-btn" onclick="dashboard.refresh()">↻ Refresh</button>
+                            </h2>
+                            ${this.renderRunHistory()}
+                        </div>
+
+                        <div class="card card-full">
+                            <h2>🔗 Task Graph</h2>
+                            ${this.renderTaskGraph()}
+                            ${this.selectedDag ? `<button class="button" onclick="dashboard.triggerDag('${this.selectedDag.id}')">▶ Trigger</button>` : ''}
+                        </div>
+
+                        <div class="card card-full">
+                            <h2>📝 Live Logs</h2>
+                            ${this.renderLogs()}
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2>ℹ️ System Info</h2>
+                        <div class="stat-box">
+                            <div class="stat-number">${new Date().toLocaleTimeString()}</div>
+                            <div class="stat-label">Last Updated</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-number">${this.dags.length}</div>
+                            <div class="stat-label">Active DAGs</div>
+                        </div>
+                    </div>
+                `;
+                document.getElementById('app').innerHTML = html;
+            }
+        }
+
+        // Initialize dashboard when page loads
+        let dashboard;
+        document.addEventListener('DOMContentLoaded', () => {
+            dashboard = new IronFlowDashboard();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build:
+    name: Build for ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            artifact_name: ironflow
+            asset_name: ironflow-linux-amd64
+          - os: macos-latest
+            artifact_name: ironflow
+            asset_name: ironflow-macos-amd64
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Build
+        run: cargo build --release
+
+      - name: Rename asset
+        run: |
+          mv target/release/${{ matrix.artifact_name }} target/release/${{ matrix.asset_name }}
+
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: target/release/${{ matrix.asset_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

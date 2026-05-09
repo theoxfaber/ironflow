@@ -1,0 +1,27 @@
+[dag]
+id = "etl_pipeline"
+description = "Daily ETL pipeline"
+schedule = "0 2 * * *"
+max_active_runs = 1
+catchup = false
+
+[[dag.tasks]]
+id = "extract"
+operator = "bash"
+command = "echo 'extracting data'"
+retries = 3
+retry_delay_secs = 60
+timeout_secs = 3600
+
+[[dag.tasks]]
+id = "transform"
+operator = "bash"
+command = "echo 'transforming data'"
+depends_on = ["extract"]
+retries = 2
+
+[[dag.tasks]]
+id = "load"
+operator = "bash"
+command = "echo 'loading data'"
+depends_on = ["transform"]

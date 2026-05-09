@@ -1,0 +1,41 @@
+[package]
+name = "ironflow"
+version = "0.1.0"
+edition = "2021"
+description = "A lightning-fast, zero-dependency workflow orchestrator written in Rust"
+license = "Apache-2.0"
+repository = "https://github.com/prranavv/ironflow"
+keywords = ["orchestrator", "workflow", "dag", "scheduler", "pipeline"]
+categories = ["command-line-utilities", "asynchronous"]
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "sqlite"] }
+tokio-cron-scheduler = "0.9"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+uuid = { version = "1", features = ["v4", "serde"] }
+thiserror = "1"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
+notify = "6"
+reqwest = { version = "0.11", features = ["json"] }
+tokio-tungstenite = "0.21"
+anyhow = "1"
+chrono = { version = "0.4", features = ["serde"] }
+regex = "1"
+clap = { version = "4", features = ["derive"] }
+dotenv = "0.15"
+log = "0.4"
+futures = "0.3"
+async-trait = "0.1"
+cron = "0.12"
+rust-embed = { version = "8", features = ["compression"] }
+tower = "0.4"
+tower-http = { version = "0.5", features = ["compression-gzip"] }
+mime_guess = "2"
+[dev-dependencies]
+tokio-test = "0.4"
+tempfile = "3"
