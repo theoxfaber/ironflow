@@ -32,7 +32,7 @@ No Python runtime. No Celery workers. No Redis. No PostgreSQL. One binary. One f
 
 ```bash
 # 30-second Quickstart
-curl -L https://github.com/prranavv/ironflow/releases/latest/download/ironflow-linux-amd64 -o ironflow
+curl -L https://github.com/theoxfaber/ironflow/releases/latest/download/ironflow-linux-amd64 -o ironflow
 chmod +x ironflow
 ./ironflow start --dags-dir ./examples --with-api
 ```
@@ -78,11 +78,11 @@ cargo install ironflow
 ```
 
 **Option 2: Prebuilt Binaries**
-Download the latest binary for your OS from the [Releases](https://github.com/prranavv/ironflow/releases) page.
+Download the latest binary for your OS from the [Releases](https://github.com/theoxfaber/ironflow/releases) page.
 
 **Option 3: From Source**
 ```bash
-git clone https://github.com/prranavv/ironflow
+git clone https://github.com/theoxfaber/ironflow
 cd ironflow
 cargo build --release
 ```

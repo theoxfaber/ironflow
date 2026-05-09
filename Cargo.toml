@@ -1,12 +1,22 @@
 [package]
-name = "ironflow"
+name = "ironflow-orchestrator"
 version = "0.1.0"
 edition = "2021"
 description = "A lightning-fast, zero-dependency workflow orchestrator written in Rust"
 license = "Apache-2.0"
-repository = "https://github.com/prranavv/ironflow"
+repository = "https://github.com/theoxfaber/ironflow"
+homepage = "https://github.com/theoxfaber/ironflow"
+readme = "README.md"
 keywords = ["orchestrator", "workflow", "dag", "scheduler", "pipeline"]
 categories = ["command-line-utilities", "asynchronous"]
+
+[[bin]]
+name = "ironflow"
+path = "src/main.rs"
+
+[lib]
+name = "ironflow"
+path = "src/lib.rs"
 
 [dependencies]
 tokio = { version = "1", features = ["full"] }
