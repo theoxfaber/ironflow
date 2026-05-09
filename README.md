@@ -1,8 +1,4 @@
 <p align="center">
-  <img src="./assets/banner.png" alt="IronFlow Banner" width="100%">
-</p>
-
-<p align="center">
   <a href="https://github.com/theoxfaber/ironflow/actions"><img src="https://github.com/theoxfaber/ironflow/workflows/Release/badge.svg" alt="CI Status"></a>
   <a href="https://crates.io/crates/ironflow-orchestrator"><img src="https://img.shields.io/crates/v/ironflow-orchestrator.svg" alt="Crates.io"></a>
   <a href="https://docs.rs/ironflow-orchestrator"><img src="https://docs.rs/ironflow-orchestrator/badge.svg" alt="Documentation"></a>
